@@ -1,0 +1,16 @@
+PODS:
+  - DemoActivityIndicator (0.1.0)
+
+DEPENDENCIES:
+  - DemoActivityIndicator (from `../`)
+
+EXTERNAL SOURCES:
+  DemoActivityIndicator:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  DemoActivityIndicator: d0fdaf3ac09d772e51351be37e930daf8b1726bf
+
+PODFILE CHECKSUM: 9f9cef8fb6654ced6592cb8eeba8496a9f2b2218
+
+COCOAPODS: 1.5.3

@@ -1,0 +1,22 @@
+{
+  "name": "DemoActivityIndicator",
+  "version": "0.1.0",
+  "summary": "A short description of DemoActivityIndicator.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/mihirpmehta/DemoActivityIndicator",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "mihirpmehta": "mihir.mehta@dynamicelements.no"
+  },
+  "source": {
+    "git": "https://github.com/mihirpmehta/DemoActivityIndicator.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "DemoActivityIndicator/Classes/**/*"
+}
