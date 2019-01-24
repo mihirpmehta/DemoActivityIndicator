@@ -27,7 +27,7 @@ It can work on Window as well as on UIViewController
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'mihirpmehta' => 'mihirpmehta@gmail.com' }
   s.source           = { :git => 'https://github.com/mihirpmehta/DemoActivityIndicator.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.social_media_url = 'https://twitter.com/NihilistMe'
 
   s.ios.deployment_target = '12.0'
   s.swift_version = '4.2'

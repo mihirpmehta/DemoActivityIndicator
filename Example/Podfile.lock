@@ -1,5 +1,5 @@
 PODS:
-  - DemoActivityIndicator (0.1.0)
+  - DemoActivityIndicator (1.0.0)
 
 DEPENDENCIES:
   - DemoActivityIndicator (from `../`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  DemoActivityIndicator: d0fdaf3ac09d772e51351be37e930daf8b1726bf
+  DemoActivityIndicator: b3682991bf8a0fe7d90d5ccf9f167f14de4bbdbe
 
-PODFILE CHECKSUM: 9f9cef8fb6654ced6592cb8eeba8496a9f2b2218
+PODFILE CHECKSUM: 36b03293f53fc3527f80f5f62e677d8965aa5b7f
 
 COCOAPODS: 1.5.3

@@ -7,12 +7,20 @@
 //
 
 import UIKit
+import DemoActivityIndicator
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        self.showActivityIndicator(isHidden: false, message: "With great power comes great responsibility")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.hideActivityIndicator()
+            self.showActivityIndicator()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                self.hideActivityIndicator()
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
