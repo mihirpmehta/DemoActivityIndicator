@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DemoActivityIndicator'
-  s.version          = '2.0.0'
+  s.version          = '3.0.0'
   s.summary          = 'Activity Indicator which covers the navigation bar and prevent any UI interaction while Activity indicator is spinning'
 
 # This description is used to generate tags and improve search results.
