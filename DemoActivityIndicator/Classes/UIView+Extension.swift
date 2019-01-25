@@ -8,11 +8,12 @@
 import Foundation
 import UIKit
 
-
-
 fileprivate let notificationDisappearTime:Double = 5.0
 fileprivate var activityIndicatorCountAssociationKey: UInt8 = 3
 fileprivate var tagValueAssociationKey: UInt8 = 4
+fileprivate let viewCornerRadius:CGFloat = 10.0
+fileprivate let indicatorHeight:CGFloat = 80.0
+fileprivate let indicatorWidth:CGFloat = indicatorHeight
 
 public extension UIView {
     
@@ -34,8 +35,6 @@ public extension UIView {
             objc_setAssociatedObject(self, &tagValueAssociationKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
         }
     }
-    
-    
     /// function that determines if activity indicator is currently on the screen or not
     ///
     /// - Returns: `true` if activity indicator is present `false` otherwsise
@@ -62,7 +61,6 @@ public extension UIView {
             
             return
         }
-        let unnecessary:Bool = false
         let container: UIView = UIView()
         if isHidden {
             container.isHidden = true
@@ -81,24 +79,14 @@ public extension UIView {
         } else {
             messageContainerView.backgroundColor = UIColor.clear
         }
-        messageContainerView.layer.cornerRadius = 10.0
+        messageContainerView.layer.cornerRadius = viewCornerRadius
         messageContainerView.clipsToBounds = true
         
         if !withMessage.isEmpty {
+            messageContainerView.addShadow()
             
-            messageContainerView.layer.masksToBounds = false
-            messageContainerView.layer.shadowColor = UIColor.black.cgColor
-            messageContainerView.layer.shadowOpacity = 0.5
-            messageContainerView.layer.shadowOffset = CGSize(width: -1, height: 1)
-            messageContainerView.layer.shadowRadius = 10
-            
-            
-            messageContainerView.layer.shouldRasterize = true
-            messageContainerView.layer.rasterizationScale = UIScreen.main.scale
         }
-        
-        
-        loadingView.frame = CGRect(x:0, y:0, width:80, height:80)
+        loadingView.frame = CGRect(x:0, y:0, width:indicatorWidth, height:indicatorHeight)
         loadingView.center = self.center
         
         if !withMessage.isEmpty {
@@ -106,12 +94,9 @@ public extension UIView {
         } else {
             loadingView.backgroundColor = UIColor.gray
         }
-        
-        
         loadingView.clipsToBounds = true
-        loadingView.layer.cornerRadius = 10
-        
-        activityIndicator.frame = CGRect(x:0, y:0, width:40, height:40)
+        loadingView.layer.cornerRadius = viewCornerRadius
+        activityIndicator.frame = CGRect(x:0, y:0, width:indicatorWidth/2, height:indicatorHeight/2)
         activityIndicator.style = UIActivityIndicatorView.Style.whiteLarge
         activityIndicator.center = CGPoint(x:loadingView.frame.size.width / 2, y:loadingView.frame.size.height / 2);
         if !withMessage.isEmpty {
@@ -121,8 +106,8 @@ public extension UIView {
         loadingView.addSubview(activityIndicator)
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            activityIndicator.heightAnchor.constraint(equalToConstant: 40.0),
-            activityIndicator.widthAnchor.constraint(equalToConstant: 40.0),
+            activityIndicator.heightAnchor.constraint(equalToConstant: indicatorWidth/2),
+            activityIndicator.widthAnchor.constraint(equalToConstant: indicatorWidth/2),
             activityIndicator.centerXAnchor.constraint(equalTo: loadingView.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: loadingView.centerYAnchor)
             ])
@@ -138,15 +123,12 @@ public extension UIView {
             loadingHeight = 80
             centerY = 0
         }
-        
         NSLayoutConstraint.activate([
             loadingView.heightAnchor.constraint(equalToConstant: loadingHeight),
             loadingView.widthAnchor.constraint(equalToConstant: loadingHeight),
             loadingView.centerXAnchor.constraint(equalTo: messageContainerView.centerXAnchor),
             loadingView.centerYAnchor.constraint(equalTo: messageContainerView.centerYAnchor, constant: centerY)
             ])
-        
-        
         if !withMessage.isEmpty {
             
             let label:UILabel = UILabel(frame: CGRect.zero)
@@ -174,8 +156,6 @@ public extension UIView {
         
         container.addSubview(messageContainerView)
         NSLayoutConstraint.activate([
-            //            messageContainerView.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 44.0),
-            //             messageContainerView.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -44.0),
             messageContainerView.centerXAnchor.constraint(equalTo: container.centerXAnchor),
             messageContainerView.centerYAnchor.constraint(equalTo: container.centerYAnchor)
             ])
@@ -205,7 +185,15 @@ public extension UIView {
             messageContainerView.layer.shadowPath = UIBezierPath(rect: messageContainerView.bounds).cgPath
         }
     }
-    
+    func addShadow() {
+        self.layer.masksToBounds = false
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOpacity = 0.5
+        self.layer.shadowOffset = CGSize(width: -1, height: 1)
+        self.layer.shadowRadius = 10
+        self.layer.shouldRasterize = true
+        self.layer.rasterizationScale = UIScreen.main.scale
+    }
     @discardableResult
     func stopActivityIndicator() -> Bool {
         if let activityIndicatorCount: Int = self.activityIndicatorCount {

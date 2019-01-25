@@ -25,7 +25,7 @@ public extension UIViewController {
     
     /// Hides Activity Indicator which was displayed by calling `showActivityIndicator`
     func hideActivityIndicator() {
-        if let stopped: Bool = self.view.stopActivityIndicator(), stopped {
+        if self.view.stopActivityIndicator() {
             if let navigationController: UINavigationController = self.navigationController {
                 navigationController.navigationBar.isUserInteractionEnabled = true
                 navigationController.view.isUserInteractionEnabled = true
