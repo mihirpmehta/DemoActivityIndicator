@@ -8,12 +8,12 @@
 import Foundation
 import UIKit
 
-fileprivate let notificationDisappearTime:Double = 5.0
-fileprivate var activityIndicatorCountAssociationKey: UInt8 = 3
-fileprivate var tagValueAssociationKey: UInt8 = 4
-fileprivate let viewCornerRadius:CGFloat = 10.0
-fileprivate let indicatorHeight:CGFloat = 80.0
-fileprivate let indicatorWidth:CGFloat = indicatorHeight
+private let notificationDisappearTime:Double = 5.0
+private var activityIndicatorCountAssociationKey: UInt8 = 3
+private var tagValueAssociationKey: UInt8 = 4
+private let viewCornerRadius:CGFloat = 10.0
+private let indicatorHeight:CGFloat = 80.0
+private let indicatorWidth:CGFloat = indicatorHeight
 
 public extension UIView {
     
