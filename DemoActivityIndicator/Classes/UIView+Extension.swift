@@ -14,6 +14,7 @@ private var tagValueAssociationKey: UInt8 = 4
 private let viewCornerRadius:CGFloat = 10.0
 private let indicatorHeight:CGFloat = 80.0
 private let indicatorWidth:CGFloat = indicatorHeight
+private let labelPadding:CGFloat = 16.0
 
 public extension UIView {
     
@@ -50,7 +51,7 @@ public extension UIView {
         }
     }
     
-    func startActivityIndicator(isHidden:Bool = false,withMessage:String = "") {
+    func startActivityIndicator(isHidden:Bool = false,withMessage:String = "",configuration:ActivityConfiguration) {
         
         if isActivityIndicatorAnimating() {
             if let activityIndicatorCount: Int = self.activityIndicatorCount {
@@ -75,7 +76,7 @@ public extension UIView {
         
         messageContainerView.translatesAutoresizingMaskIntoConstraints = false
         if !withMessage.isEmpty {
-            messageContainerView.backgroundColor = UIColor.white.withAlphaComponent(0.9)
+            messageContainerView.backgroundColor = configuration.messageBackgroundColor.withAlphaComponent(0.9)
         } else {
             messageContainerView.backgroundColor = UIColor.clear
         }
@@ -86,21 +87,23 @@ public extension UIView {
             messageContainerView.addShadow()
             
         }
-        loadingView.frame = CGRect(x:0, y:0, width:indicatorWidth, height:indicatorHeight)
+        
         loadingView.center = self.center
         
         if !withMessage.isEmpty {
             loadingView.backgroundColor = UIColor.clear
         } else {
-            loadingView.backgroundColor = UIColor.gray
+            loadingView.backgroundColor = configuration.indicatorBackGroundColor
         }
         loadingView.clipsToBounds = true
         loadingView.layer.cornerRadius = viewCornerRadius
-        activityIndicator.frame = CGRect(x:0, y:0, width:indicatorWidth/2, height:indicatorHeight/2)
+        
         activityIndicator.style = UIActivityIndicatorView.Style.whiteLarge
         activityIndicator.center = CGPoint(x:loadingView.frame.size.width / 2, y:loadingView.frame.size.height / 2);
         if !withMessage.isEmpty {
-            activityIndicator.color = UIColor.black
+            activityIndicator.color = configuration.indicatorColorWithMessage
+        } else {
+            activityIndicator.color = configuration.indicatorColor
         }
         
         loadingView.addSubview(activityIndicator)
@@ -117,10 +120,10 @@ public extension UIView {
         let loadingHeight:CGFloat
         let centerY:CGFloat
         if !withMessage.isEmpty {
-            loadingHeight = 60
+            loadingHeight = indicatorHeight - 20
             centerY = -24
         } else {
-            loadingHeight = 80
+            loadingHeight = indicatorHeight
             centerY = 0
         }
         NSLayoutConstraint.activate([
@@ -138,14 +141,14 @@ public extension UIView {
             label.numberOfLines = 2
             label.textAlignment = .center
             label.lineBreakMode = .byWordWrapping
-            //label.textColor = UIColor.white
+            label.textColor = configuration.messageTextColor
             
             messageContainerView.addSubview(label)
             NSLayoutConstraint.activate([
-                label.topAnchor.constraint(equalTo: loadingView.bottomAnchor, constant: 16),
-                label.leadingAnchor.constraint(equalTo: messageContainerView.leadingAnchor, constant: 16.0),
-                label.trailingAnchor.constraint(equalTo: messageContainerView.trailingAnchor, constant: -16.0),
-                messageContainerView.bottomAnchor.constraint(equalTo: label.bottomAnchor, constant: 16.0)
+                label.topAnchor.constraint(equalTo: loadingView.bottomAnchor, constant: labelPadding),
+                label.leadingAnchor.constraint(equalTo: messageContainerView.leadingAnchor, constant: labelPadding),
+                label.trailingAnchor.constraint(equalTo: messageContainerView.trailingAnchor, constant: -labelPadding),
+                messageContainerView.bottomAnchor.constraint(equalTo: label.bottomAnchor, constant: labelPadding)
                 
                 ])
         } else {

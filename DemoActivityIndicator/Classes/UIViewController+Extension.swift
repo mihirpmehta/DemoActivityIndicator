@@ -15,8 +15,8 @@ public extension UIViewController {
     /// - Parameters:
     ///   - isHidden: optional set it true if you want activity Indicator to be hidden default set to false,
     ///   - message: optional *text* that will be displayed along with activity indicator
-    func showActivityIndicator(isHidden:Bool = false,message:String = "") {
-        self.view.startActivityIndicator(isHidden:isHidden, withMessage: message)
+    func showActivityIndicator(isHidden:Bool = false,message:String = "",configuration:ActivityConfiguration = ActivityConfiguration.default) {
+        self.view.startActivityIndicator(isHidden:isHidden, withMessage: message,configuration: configuration)
         if let navigationController: UINavigationController = self.navigationController {
             navigationController.navigationBar.isUserInteractionEnabled = false
             navigationController.view.isUserInteractionEnabled = false

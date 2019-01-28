@@ -13,10 +13,11 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.showActivityIndicator(isHidden: false, message: "With great power comes great responsibility")
+        let configuration:ActivityConfiguration = ActivityConfiguration(indicatorColor: UIColor.blue, indicatorColorWithMessage: UIColor.red, backgroundColor: UIColor.green, messageTextColor: UIColor.yellow, indicatorBackGroundColor: UIColor.brown)
+        self.showActivityIndicator(isHidden: false, message: "With great power comes great responsibility",configuration: configuration)
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.hideActivityIndicator()
-            self.showActivityIndicator()
+            self.showActivityIndicator(configuration: configuration)
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                 self.hideActivityIndicator()
             }
