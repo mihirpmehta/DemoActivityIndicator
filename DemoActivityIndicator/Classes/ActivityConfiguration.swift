@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 public class ActivityConfiguration {
     var indicatorColor:UIColor = UIColor.white
